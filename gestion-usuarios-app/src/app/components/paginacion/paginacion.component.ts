@@ -1,7 +1,8 @@
 import { NgFor } from '@angular/common';
-import { Component, Input, Output, EventEmitter, Injectable } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { inject } from '@angular/core';
+import { IUsuario } from '../../interfaces/iusuario';
 
 @Component({
   selector: 'app-paginacion',

@@ -13,10 +13,10 @@
         <div class="collapse navbar-collapse" id="navbarPantallaPequena">
           <ul class="navbar-nav ms-auto">
               <li class="nav-item pe-5">
-                  <a class="nav-link link-danger disabled fs-4" aria-disabled="true">Home</a>
+                  <a class="nav-link fs-4" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'ignored', matrixParams: 'ignored' }" ariaCurrentWhenActive="page" [ngClass]="{ 'text-danger': isActiveHome, 'active': isActiveHome }" (isActiveChange)="isActiveHome = $event">Home</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link active fs-4" aria-current="page" href="nuevo-usuario">Nuevo Usuario</a>
+                  <a class="nav-link fs-4" [routerLink]="['/home/newuser']" routerLinkActive="active" [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'ignored', matrixParams: 'ignored' }" ariaCurrentWhenActive="page" [ngClass]="{ 'text-danger': isActiveNewUser, 'active': isActiveNewUser }" (isActiveChange)="isActiveNewUser = $event">Nuevo Usuario</a>
               </li>
           </ul>
         </div>

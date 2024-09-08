@@ -1,0 +1,43 @@
+<!-- Overlay de Bootstrap que bloquea la interacción -->
+<div class="modal-backdrop fade show" *ngIf="isToastVisible"></div>
+
+<div class="container mt-4">
+    <h2>{{ isEditing ? 'Actualizar Usuario' : 'Registrar Nuevo Usuario' }}</h2>
+    <form (ngSubmit)="crearUsuario()" #usuarioForm="ngForm">
+      <div class="mb-3">
+        <label for="first_name" class="form-label">Nombre Usuario</label>
+        <input type="text" class="form-control" id="first_name" name="first_name" [(ngModel)]="usuario.first_name" required />
+      </div>
+      <div class="mb-3">
+        <label for="last_name" class="form-label">Usuario Apellido</label>
+        <input type="text" class="form-control" id="last_name" name="last_name" [(ngModel)]="usuario.last_name" required />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email Usuario</label>
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="usuario.email" required />
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label">Imagen Usuario</label>
+        <input type="text" class="form-control" id="image" name="image" [(ngModel)]="usuario.image" required />
+      </div>
+      <button type="submit" class="btn btn-primary">{{ isEditing ? 'Actualizar' : 'Guardar' }}</button>
+    </form>
+  
+    <!-- Toast de Notificación -->
+    <div
+      class="toast align-items-center text-bg-info border-0"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+      id="notificacionToast"
+      style="position: fixed; top: 20px; right: 20px; z-index: 1055;"
+    >
+      <div class="d-flex">
+        <div class="toast-body" id="notificacionText">
+          Mensaje de notificación
+        </div>
+        <button type="button" class="btn btn-primary btn-sm me-2" data-bs-autohide="false" (click)="aceptar()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+  

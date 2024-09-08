@@ -1,4 +1,5 @@
-<div class="container">
+<!-- Mostrar el listado de usuarios cuando ningun usuario esté seleccionado -->
+<div class="container" *ngIf="!usuarioSeleccionado">
     <div class="text-center row row-cols-md-5">
         @for( usuario of arrUsuarios; track usuario._id ){
             <div class="col mt-4 d-flex align-items-stretch">
@@ -9,27 +10,57 @@
                     <div class="fs-7 fw-semibold text-wrap">{{ usuario.first_name + ' ' + usuario.last_name | nombreFormateado }}</div>
                     <div class="d-flex justify-content-center align-items-center gap-2 mt-2">
                         <div class="text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <svg (click)="irADetalle(usuario.id)" role="button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                             </svg>
-                            <div class="small">Ver detalle</div>
+                            <div (click)="irADetalle(usuario.id)" class="small" role="button">Ver detalle</div>
                         </div>
                         <div class="text-center">
-                            <svg (click)="verDetalle(usuario)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon-md-heavy" viewBox="0 0 24 24">
+                            <svg (click)="irAActualizar(usuario.id)" role="button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon-md-heavy" viewBox="0 0 24 24">
                                 <path d="M3.06957 10.8763C3.62331 6.43564 7.40967 3 12 3C14.2824 3 16.4028 3.85067 18.0118 5.25439V4C18.0118 3.44772 18.4595 3 19.0118 3C19.5641 3 20.0118 3.44772 20.0118 4V8C20.0118 8.55228 19.5641 9 19.0118 9H15C14.4477 9 14 8.55228 14 8C14 7.44772 14.4477 7 15 7H16.9571C15.6757 5.76379 13.9101 5 12 5C8.43108 5 5.48466 7.67174 5.0542 11.1237C4.98586 11.6718 4.48619 12.0607 3.93815 11.9923C3.39011 11.924 3.00123 11.4243 3.06957 10.8763ZM20.0618 12.0077C20.6099 12.076 20.9988 12.5757 20.9304 13.1237C20.3767 17.5644 16.5903 21 12 21C9.72322 21 7.60762 20.1535 5.99999 18.7559V20C5.99999 20.5523 5.55228 21 4.99999 21C4.44771 21 3.99999 20.5523 3.99999 20V16C3.99999 15.4477 4.44771 15 4.99999 15H8.99999C9.55228 15 9.99999 15.4477 9.99999 16C9.99999 16.5523 9.55228 17 8.99999 17H7.04285C8.32433 18.2362 10.0899 19 12 19C15.5689 19 18.5153 16.3283 18.9458 12.8763C19.0141 12.3282 19.5138 11.9393 20.0618 12.0077Z" />
                             </svg>
-                            <div class="small">Actualizar</div>
+                            <div (click)="irAActualizar(usuario.id)" class="small" role="button">Actualizar</div>
                         </div>
                         <div class="text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <svg (click)="eliminarUsuario(usuario.id)" role="button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                                 <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
                             </svg>
-                            <div class="small">Borrar</div>
+                            <div (click)="eliminarUsuario(usuario.id)" class="small" role="button">Borrar</div>
                         </div>
                     </div>
                 </div>
             </div>
         }
     </div>
+</div>
+
+<!-- Pie de página solo se muestra cuando no hay usuario seleccionado -->
+<footer class="footer py-4" class="footer">
+    <div class="container text-center pt-5">
+        <app-paginacion />
+    </div>
+</footer>
+
+<!-- Toast de Confirmación -->
+<div class="toast-container top-0 end-0 p-3">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="confirmToast">
+        <div class="toast-body">
+            ¿Estás seguro de que deseas eliminar al usuario?
+            <div class="mt-2 pt-2 border-top">
+                <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="toast">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="confirmarEliminacion()" data-bs-dismiss="toast">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast de Notificación -->
+<div [ngClass]="{'text-bg-success': !isError, 'text-bg-danger': isError}" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" id="notificacionToast" style="position: fixed; top: 20px; right: 20px; z-index: 1055;">
+  <div class="d-flex">
+    <div class="toast-body" id="notificacionText">
+      Usuario eliminado correctamente.
+    </div>
+    <a type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" href="#"></a>
+  </div>
 </div>

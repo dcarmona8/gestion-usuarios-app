@@ -1,1 +1,43 @@
-<p>usuario-detalle works!</p>
+<div class="container">
+    <div class="container-fluid user-detail-container">
+            <div class="row">
+            <div class="col-12 col-md-4 text-center">
+                <img [src]="usuario.image" class="rounded-circle img-fluid" style="max-width: 200px;" alt="Imagen del usuario" />
+            </div>
+            <div class="col-8">
+                <h4>{{ usuario.first_name + ' ' + usuario.last_name | dividirNombre }}</h4>
+                <h4>{{ usuario.first_name + ' ' + usuario.last_name | dividirApellidos }}</h4>
+                <p><strong>Nombre Usuario:</strong> {{ usuario.username }}</p>
+                <p><strong>Email:</strong> {{ usuario.email }}</p>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-danger" (click)="eliminarUsuario()">Eliminar</button>
+                    <a type="button" class="btn btn-outline-primary" href="/home/updateuser/{{ usuario.id }}">Actualizar</a>
+                    <a type="button" class="btn btn-outline-secondary" href="/home">Volver a listado</a>
+                </div>
+            </div>
+            </div>
+    </div>
+</div>
+
+<!-- Toast de Confirmación -->
+ <div class="toast-container top-0 end-0 p-3">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="confirmToast">
+        <div class="toast-body">
+            ¿Estás seguro de que deseas eliminar este usuario?
+            <div class="mt-2 pt-2 border-top">
+                <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="toast">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="confirmarEliminacion()" data-bs-dismiss="toast">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast de Notificación -->
+<div [ngClass]="{'text-bg-success': !isError, 'text-bg-danger': isError}" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" id="notificacionToast" style="position: fixed; top: 20px; right: 20px; z-index: 1055;">
+  <div class="d-flex">
+    <div class="toast-body" id="notificacionText">
+      Usuario eliminado correctamente.
+    </div>
+    <a type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" href="#"></a>
+  </div>
+</div>
